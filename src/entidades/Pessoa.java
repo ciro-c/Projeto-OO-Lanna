@@ -12,6 +12,13 @@ public class Pessoa {
 	
 	//Métodos
 	
+	public Pessoa(String nome, String email, double rendimento) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.rendimento = rendimento;
+	}
+	
 	public String getNome() {
 		return this.nome;
 	}
@@ -36,7 +43,8 @@ public class Pessoa {
 		this.rendimento = rendimento;
 	}
 	
-	boolean cadastrarPessoa() {
+	
+	public boolean cadastrarPessoa() {
 		/*Retornar .txt*/
 		return cadastro;
 	}
