@@ -43,7 +43,6 @@ public class Pessoa {
 		this.rendimento = rendimento;
 	}
 	
-	
 	public boolean cadastrarPessoa() {
 		/*Retornar .txt*/
 		return cadastro;

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import entidades.Despesas;
 import entidades.Pessoa;
 import entidades.Categoria;
+import restricoes.DadosPessoaisIncompletosException;
 import entidades.Subcategoria;
+import restricoes.RendimentoInvalidoException;
 
 // Main
 
@@ -29,7 +31,7 @@ public class Republica {
 		
 		do {
 		
-			JOptionPane.showMessageDialog(null, "----------DIVISÃO DAS DESPESAS DE UMA REPÚBLICA----------\n\nOlá, o que deseja fazer?\n"
+			JOptionPane.showMessageDialog(null, "----------DIVISÃO DAS DESPESAS DE UMA REPÚBLICA----------\n\nOlá, o que pretende fazer?\n"
 			+ "1) Cadastrar pessoa...\n2) Cadastrar despesa...\n3) Cadastrar categoria...\n4) Sair do programa...");
 			String respostaOpcao = JOptionPane.showInputDialog("");
 			int rO = Integer.parseInt(respostaOpcao);
@@ -41,41 +43,55 @@ public class Republica {
 				// Cadastrar pessoa
 				case 1:
 					
-					String opcaoPessoa = JOptionPane.showInputDialog ("Deseja cadastrar uma pessoa ou retornar ao menu "
-							+ "principal? \n1) Cadastrar...\n2) Retornar ao menu principal...");
-					int oP = Integer.parseInt(opcaoPessoa);
-					j = oP;	
+					boolean cadastro;
 					
-					if(j==1) {
-						do{
+					cadastro = false;
+					
+					do {
+					do {
+						
+						JOptionPane.showMessageDialog(null, "CADASTRAR PESSOA");
+						JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
+						String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
+						String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
+						String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
+						double rP = Double.parseDouble(rendimentoPessoa);
 							
-							JOptionPane.showMessageDialog(null, "Você escolheu a primeira opção!");
-							JOptionPane.showMessageDialog(null, "CADASTRAR PESSOA");
-							JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
-							String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
-							String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
-							String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
-							double rP = Double.parseDouble(rendimentoPessoa);
+						try {
 							
 							p.add(new Pessoa(nomePessoa, emailPessoa, rP));
 							
-							/*try {
-								p.add(new Pessoa(nomePessoa, emailPessoa, rP));
-							}catch (DadosPessoaisIncompletos) {
-								
-							}*/
+							int ultimoObjeto = p.size()-1;
 							
-							JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
+							if ((nomePessoa == null || nomePessoa.isEmpty())||(emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
+							rendimentoPessoa.isEmpty())) {
+								p.remove(ultimoObjeto);
+								throw new DadosPessoaisIncompletosException("Alguns dados não foram inseridos.");
+							}else if(rP < 0) {
+								p.remove(ultimoObjeto);
+								throw new RendimentoInvalidoException("Não é possível inserir valores negativos.");
+							}else {
+								JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+								JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
+								cadastro = true;
+							}
+	
+						}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
+							String msg = e.getMessage() + " Exceção capturada!";
+							JOptionPane.showMessageDialog(null, msg);
+							e.printStackTrace();
+						}
+					
+					}while(cadastro==false);
+					
+					String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
+					+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
+					int oN = Integer.parseInt(opcaoNova);
+					j = oN;
+					
+					}while(j==1);
 							
-							String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
-							+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
-							int oN = Integer.parseInt(opcaoNova);
-							j = oN;
-							
-						}while(j==1);
-					}else {
-						break;
-					}
+				break;
 					
 				// Cadastrar despesa
 				case 2:
@@ -87,7 +103,7 @@ public class Republica {
 				break;
 				// Sair do programa
 				case 4:
-					JOptionPane.showMessageDialog(null, "Opção 4");
+					JOptionPane.showMessageDialog(null, "Encerrando o programa...");
 				break;
 			}
 		}while(i!=4);
