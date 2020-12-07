@@ -2,47 +2,42 @@ package entidades;
 
 public class Pessoa {
 	
-	//Atributos
-	
 	private String nome;
 	private String email;
-	private String rendimento;
+	private String rendimentos;
 	
-	private boolean cadastro;
-	
-	public Pessoa(String nome, String email, String rendimento) {
+	public Pessoa(String nome, String email, String rendimentos) {
 		super();
 		this.nome = nome;
 		this.email = email;
-		this.rendimento = rendimento;
+		this.rendimentos = rendimentos;
 	}
 	
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getRendimento() {
-		return this.rendimento;
+
+	public String getRendimentos() {
+		return rendimentos;
 	}
-	
-	public void setRendimento(String rendimento) {
-		this.rendimento = rendimento;
+
+	public void setRendimentos(String rendimentos) {
+		this.rendimentos = rendimentos;
 	}
-	
-	public boolean cadastrarPessoa() {
-		/*Retornar .txt*/
-		return cadastro;
+
+	public void cadastrarPessoa() {
+		
 	}
 }
