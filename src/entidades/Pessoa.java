@@ -10,8 +10,6 @@ public class Pessoa {
 	
 	private boolean cadastro;
 	
-	//Métodos
-	
 	public Pessoa(String nome, String email, String rendimento) {
 		super();
 		this.nome = nome;

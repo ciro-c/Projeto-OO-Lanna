@@ -1,25 +1,29 @@
 package entidades;
 
+
 public class Categoria {
-	
-	//Atributos
-	
+
 	private String descricaoCategoria;
+	Subcategoria sub[];
 	
-	private String subcategoria;
-	
-	//Métodos
-	
+	public Categoria(String descricaoCategoria) {
+		super();
+		this.descricaoCategoria = descricaoCategoria;
+	}
+
 	public String getDescricaoCategoria() {
 		return descricaoCategoria;
 	}
-	
+
+
+
 	public void setDescricaoCategoria(String descricaoCategoria) {
 		this.descricaoCategoria = descricaoCategoria;
 	}
-	
-	String cadastrarSubcategoria() {
-		return subcategoria;
-	}
 
+
+
+	public void cadastrarSubcategoria() {
+		
+	}
 }

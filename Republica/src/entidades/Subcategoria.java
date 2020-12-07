@@ -2,18 +2,21 @@ package entidades;
 
 public class Subcategoria {
 	
-	//Atributos
-	
 	private String descricaoSubcategoria;
+
+	public Subcategoria(String descricaoSubcategoria) {
+		super();
+		this.descricaoSubcategoria = descricaoSubcategoria;
 	
-	//Métodos
+	}
 
 	public String getDescricaoSubcategoria() {
 		return descricaoSubcategoria;
 	}
-	
+
 	public void setDescricaoSubcategoria(String descricaoSubcategoria) {
 		this.descricaoSubcategoria = descricaoSubcategoria;
 	}
+	
 	
 }
