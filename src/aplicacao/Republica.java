@@ -28,7 +28,7 @@ public class Republica {
 		int j = 0; // Varavel de condio das opes
 		
 		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); // Coleo de objetos da classe Pessoa
-		
+		List<Despesas> list = new ArrayList<>();
 		// Menu principal
 		
 		do {
@@ -96,23 +96,29 @@ public class Republica {
 				
 				// Cadastrar despesa	
 				case 2:
-					List<Despesas> list = new ArrayList<>();
-						
+					String descricaoSubcategoria;
 					String registro = JOptionPane.showInputDialog("Digite a quantidade de despesas existentes: "); 
 					int k = Integer.parseInt(registro);
+
 					
 					for(int m=0; m<k; m++) {
 						JOptionPane.showMessageDialog(null, "Despesa #" + (m+1) + ": ");
 						String descricaoDespesa = JOptionPane.showInputDialog("Nome da despesa: Ex.(CAESB, CEB, Net..)");
 						String descricaoCategoria = JOptionPane.showInputDialog("Digite o nome da categoria. Ex.(Água, Luz, Telefonia e comunicações..)");
+						String valor = JOptionPane.showInputDialog("Digite o valor da despesa: "); 
+						double val = Double.parseDouble(valor);
 						int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?", "Continua", JOptionPane.YES_NO_OPTION);
 						
-						if(sub == JOptionPane.YES_OPTION) {
-							String descricaoSubcategoria = JOptionPane.showInputDialog("Digite o nome da subcategoria relacionada a despesa.");
-						}
+						list.add(new Despesas(descricaoDespesa,val));
 						
-						String valor = JOptionPane.showInputDialog("Digite o valor da despesa: "); 
-						int val = Integer.parseInt(valor);
+						int ultimaDespesa = list.size()-1;
+						
+						list.get(ultimaDespesa).cadastrarCategoria(descricaoCategoria);
+						
+						if(sub == JOptionPane.YES_OPTION) {
+							descricaoSubcategoria = JOptionPane.showInputDialog("Digite o nome da subcategoria relacionada a despesa.");
+							list.get(ultimaDespesa).categoria.cadastrarSubcategoria(descricaoSubcategoria);
+						}
 					}
 				break;
 				// Cadastrar categoria

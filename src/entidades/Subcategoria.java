@@ -1,13 +1,12 @@
 package entidades;
 
-public class Subcategoria {
+public class Subcategoria extends Categoria {
 	
 	private String descricaoSubcategoria;
 
 	public Subcategoria(String descricaoSubcategoria) {
-		super();
+		
 		this.descricaoSubcategoria = descricaoSubcategoria;
-	
 	}
 
 	public String getDescricaoSubcategoria() {

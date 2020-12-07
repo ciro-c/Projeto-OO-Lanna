@@ -4,7 +4,11 @@ package entidades;
 public class Categoria {
 
 	private String descricaoCategoria;
-	Subcategoria sub[];
+	public Subcategoria sub;
+	
+	public Categoria(){
+		
+	}	
 	
 	public Categoria(String descricaoCategoria) {
 		super();
@@ -23,7 +27,7 @@ public class Categoria {
 
 
 
-	public void cadastrarSubcategoria() {
-		
+	public void cadastrarSubcategoria(String descricaoSubcategoria) {
+		sub = new Subcategoria(descricaoSubcategoria);
 	}
 }
