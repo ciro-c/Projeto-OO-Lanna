@@ -5,7 +5,7 @@ public class Despesas {
 	//Atributos
 	
 	private String descricaoDespesa;
-	private double valor;
+	private String valor;
 	
 	private String categoria;
 	
@@ -19,11 +19,11 @@ public class Despesas {
 		this.descricaoDespesa = descricaoDespesa;
 	}
 	
-	public double getValor() {
+	public String getValor() {
 		return valor;
 	}
 	
-	public void setValor(double valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 	

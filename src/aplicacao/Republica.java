@@ -43,60 +43,105 @@ public class Republica {
 				// Cadastrar pessoa
 				case 1:
 					
-					boolean cadastro;
+					boolean cadastroUm;
 					
-					cadastro = false;
+					cadastroUm = false;
 					
 					do {
-					do {
-						
-						JOptionPane.showMessageDialog(null, "CADASTRAR PESSOA");
-						JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
-						String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
-						String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
-						String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
-						double rP = Double.parseDouble(rendimentoPessoa);
+						do {
 							
-						try {
-							
-							p.add(new Pessoa(nomePessoa, emailPessoa, rP));
-							
-							int ultimoObjeto = p.size()-1;
-							
-							if ((nomePessoa == null || nomePessoa.isEmpty())||(emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
-							rendimentoPessoa.isEmpty())) {
-								p.remove(ultimoObjeto);
-								throw new DadosPessoaisIncompletosException("Alguns dados não foram inseridos.");
-							}else if(rP < 0) {
-								p.remove(ultimoObjeto);
-								throw new RendimentoInvalidoException("Não é possível inserir valores negativos.");
-							}else {
-								JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-								JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
-								cadastro = true;
+							JOptionPane.showMessageDialog(null, "CADASTRAR PESSOA");
+							JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
+							String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
+							String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
+							String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
+								
+							try {
+								
+								p.add(new Pessoa(nomePessoa, emailPessoa, rendimentoPessoa));
+								
+								int ultimoObjeto = p.size()-1;
+								
+								if ((nomePessoa == null || nomePessoa.isEmpty()) || (emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
+								rendimentoPessoa.isEmpty())) {
+									p.remove(ultimoObjeto);
+									throw new DadosPessoaisIncompletosException("Alguns dados não foram inseridos.");
+								}else if(Integer.parseInt(rendimentoPessoa) < 0) {
+									p.remove(ultimoObjeto);
+									throw new RendimentoInvalidoException("Não é possível inserir valores negativos.");
+								}else {
+									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+									JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
+									cadastroUm = true;
+								}
+		
+							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
+								String msg = e.getMessage() + " Exceção capturada!";
+								JOptionPane.showMessageDialog(null, msg);
+								e.printStackTrace();
 							}
-	
-						}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
-							String msg = e.getMessage() + " Exceção capturada!";
-							JOptionPane.showMessageDialog(null, msg);
-							e.printStackTrace();
-						}
-					
-					}while(cadastro==false);
-					
-					String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
-					+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
-					int oN = Integer.parseInt(opcaoNova);
-					j = oN;
+						
+						}while(cadastroUm == false);
+						
+						String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
+						+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
+						int oN = Integer.parseInt(opcaoNova);
+						j = oN;
 					
 					}while(j==1);
 							
 				break;
-					
-				// Cadastrar despesa
+				
+				// Cadastrar despesa	
 				case 2:
-					JOptionPane.showMessageDialog(null, "Opção 2");
+					boolean cadastroDois;
+					
+					cadastroDois = false;
+					
+					do {
+						do {
+							
+							JOptionPane.showMessageDialog(null, "CADASTRAR DESPESA");
+							JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
+							String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
+							String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
+							String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
+								
+							try {
+								
+								p.add(new Pessoa(nomePessoa, emailPessoa, rendimentoPessoa));
+								
+								int ultimoObjeto = p.size()-1;
+								
+								if ((nomePessoa == null || nomePessoa.isEmpty()) || (emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
+								rendimentoPessoa.isEmpty())) {
+									p.remove(ultimoObjeto);
+									throw new DadosPessoaisIncompletosException("Alguns dados não foram inseridos.");
+								}else if(Integer.parseInt(rendimentoPessoa) < 0) {
+									p.remove(ultimoObjeto);
+									throw new RendimentoInvalidoException("Não é possível inserir valores negativos.");
+								}else {
+									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+									JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
+									cadastroDois = true;
+								}
+		
+							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
+								String msg = e.getMessage() + " Exceção capturada!";
+								JOptionPane.showMessageDialog(null, msg);
+								e.printStackTrace();
+							}
+						
+						}while(cadastroDois == false);
+						
+						String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
+						+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
+						int oN = Integer.parseInt(opcaoNova);
+						j = oN;
+					
+					}while(j==1);
 				break;
+				
 				// Cadastrar categoria
 				case 3:
 					JOptionPane.showMessageDialog(null, "Opção 3");

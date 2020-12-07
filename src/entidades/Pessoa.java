@@ -6,13 +6,13 @@ public class Pessoa {
 	
 	private String nome;
 	private String email;
-	private double rendimento;
+	private String rendimento;
 	
 	private boolean cadastro;
 	
 	//Métodos
 	
-	public Pessoa(String nome, String email, double rendimento) {
+	public Pessoa(String nome, String email, String rendimento) {
 		super();
 		this.nome = nome;
 		this.email = email;
@@ -35,11 +35,11 @@ public class Pessoa {
 		this.email = email;
 	}
 	
-	public double getRendimento() {
+	public String getRendimento() {
 		return this.rendimento;
 	}
 	
-	public void setRendimento(double rendimento) {
+	public void setRendimento(String rendimento) {
 		this.rendimento = rendimento;
 	}
 	
