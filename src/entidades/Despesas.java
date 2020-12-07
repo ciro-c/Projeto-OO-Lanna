@@ -1,44 +1,55 @@
 package entidades;
 
+import java.util.Date;
+
 public class Despesas {
-
-	//Atributos
 	
-	private String descricaoDespesa;
-	private Double valor;
-	private String categoria;
-
-	public Despesas(){
-	}
-
-	public Despesas(String descricaoDespesa, Double valor, String categoria) {
-		this.descricaoDespesa = descricaoDespesa;
+	private String descricaoDespesas;
+	private double valor;
+	private Date data;
+	
+	Categoria categoria[];
+	
+	public Despesas(String descricaoDespesas, double valor, Date data) {
+		super();
+		this.descricaoDespesas = descricaoDespesas;
 		this.valor = valor;
-		this.categoria = categoria;
+	}
+	
+	public String getDescricaoDespesas() {
+		return descricaoDespesas;
 	}
 
-	public String getDescricaoDespesa() {
-		return descricaoDespesa;
+	public void setDescricaoDespesas(String descricaoDespesas) {
+		this.descricaoDespesas = descricaoDespesas;
 	}
 
-	public void setDescricaoDespesa(String descricaoDespesa) {
-		this.descricaoDespesa = descricaoDespesa;
-	}
-
-	public Double getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
-	public String getCategoria() {
-		return categoria;
+	public Date getData() {
+		return data;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public void imprimirRelatorioDespesas() {
+		
+	}
+	
+	public void cadastrarCategoria() {
+		
+	}
+
+	public void setCategoria() {
+		
 	}
 
 	

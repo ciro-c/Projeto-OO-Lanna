@@ -14,7 +14,7 @@ import entidades.Categoria;
 import restricoes.DadosPessoaisIncompletosException;
 import entidades.Subcategoria;
 import restricoes.RendimentoInvalidoException;
-import sun.nio.cs.ext.ISO2022_JP;
+
 
 // Main
 
@@ -22,24 +22,24 @@ public class Republica {
 	
 	public static void main(String[] args) {
 		
-		// Variï¿½veis e Arraylists
+		// Variveis e Arraylists
 		
-		int i = 0; // Varï¿½avel de condiï¿½ï¿½o do menu principal
-		int j = 0; // Varï¿½avel de condiï¿½ï¿½o das opï¿½ï¿½es
+		int i = 0; // Varavel de condio do menu principal
+		int j = 0; // Varavel de condio das opes
 		
-		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); // Coleï¿½ï¿½o de objetos da classe Pessoa
+		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); // Coleo de objetos da classe Pessoa
 		
 		// Menu principal
 		
 		do {
 		
-			JOptionPane.showMessageDialog(null, "----------DIVISï¿½O DAS DESPESAS DE UMA REPï¿½BLICA----------\n\nOlï¿½, o que pretende fazer?\n"
+			JOptionPane.showMessageDialog(null, "----------DIVISO DAS DESPESAS DE UMA REPBLICA----------\n\nOl, o que pretende fazer?\n"
 			+ "1) Cadastrar pessoa...\n2) Cadastrar despesa...\n3) Cadastrar categoria...\n4) Sair do programa...");
-			String respostaOpcao = JOptionPane.showInputDialog("Digite o nÂº da opÃ§Ã£o desejada");
+			String respostaOpcao = JOptionPane.showInputDialog("Digite o nº da opção desejada");
 			int rO = Integer.parseInt(respostaOpcao);
 			i = rO ;
 			
-			// Opï¿½ï¿½es
+			// Opes
 			
 			switch(rO) {
 				// Cadastrar pessoa
@@ -67,18 +67,18 @@ public class Republica {
 								if ((nomePessoa == null || nomePessoa.isEmpty()) || (emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
 								rendimentoPessoa.isEmpty())) {
 									p.remove(ultimoObjeto);
-									throw new DadosPessoaisIncompletosException("Alguns dados nï¿½o foram inseridos.");
+									throw new DadosPessoaisIncompletosException("Alguns dados no foram inseridos.");
 								}else if(Integer.parseInt(rendimentoPessoa) < 0) {
 									p.remove(ultimoObjeto);
-									throw new RendimentoInvalidoException("Nï¿½o ï¿½ possï¿½vel inserir valores negativos.");
+									throw new RendimentoInvalidoException("No  possvel inserir valores negativos.");
 								}else {
 									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-									JOptionPane.showMessageDialog(null, "Nï¿½mero de cadastros efetuados: " +p.size());
+									JOptionPane.showMessageDialog(null, "Nmero de cadastros efetuados: " +p.size());
 									cadastroUm = true;
 								}
 		
 							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
-								String msg = e.getMessage() + " Exceï¿½ï¿½o capturada!";
+								String msg = e.getMessage() + " Exceo capturada!";
 								JOptionPane.showMessageDialog(null, msg);
 								e.printStackTrace();
 							}
@@ -104,7 +104,7 @@ public class Republica {
 					for(int m=0; m<k; m++) {
 						JOptionPane.showMessageDialog(null, "Despesa #" + (m+1) + ": ");
 						String descricaoDespesa = JOptionPane.showInputDialog("Nome da despesa: Ex.(CAESB, CEB, Net..)");
-						String descricaoCategoria = JOptionPane.showInputDialog("Digite o nome da categoria. Ex.(Ãgua, Luz, Telefonia e comunicaÃ§Ãµes..)");
+						String descricaoCategoria = JOptionPane.showInputDialog("Digite o nome da categoria. Ex.(Água, Luz, Telefonia e comunicações..)");
 						int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?", "Continua", JOptionPane.YES_NO_OPTION);
 						
 						if(sub == JOptionPane.YES_OPTION) {
@@ -117,7 +117,7 @@ public class Republica {
 				break;
 				// Cadastrar categoria
 				case 3:
-					JOptionPane.showMessageDialog(null, "Opï¿½ï¿½o 3");
+					JOptionPane.showMessageDialog(null, "Opo 3");
 				break;
 				// Sair do programa
 				case 4:
