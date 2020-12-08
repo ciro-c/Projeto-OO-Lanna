@@ -3,6 +3,7 @@ package entidades;
 import java.util.Date;
 
 public class Despesas {
+
 	
 	private String descricaoDespesas;
 	private double valor;
@@ -10,6 +11,7 @@ public class Despesas {
 	public Categoria categoria;
 	
 	public Despesas(String descricaoDespesas, double valor) {
+
 		super();
 		this.descricaoDespesas = descricaoDespesas;
 		this.valor = valor;
@@ -45,6 +47,7 @@ public class Despesas {
 	
 	public void cadastrarCategoria(String descricaoCategoria) {
 		categoria = new Categoria(descricaoCategoria);
+
 	}
 	
 	

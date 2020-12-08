@@ -1,6 +1,8 @@
 package entidades;
 
+
 public class Subcategoria extends Categoria {
+
 	
 	private String descricaoSubcategoria;
 

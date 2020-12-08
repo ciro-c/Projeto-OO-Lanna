@@ -4,12 +4,13 @@ package entidades;
 public class Categoria {
 
 	private String descricaoCategoria;
+
 	public Subcategoria sub;
 	
 	public Categoria(){
 		
 	}	
-	
+  
 	public Categoria(String descricaoCategoria) {
 		super();
 		this.descricaoCategoria = descricaoCategoria;
@@ -24,6 +25,7 @@ public class Categoria {
 	public void setDescricaoCategoria(String descricaoCategoria) {
 		this.descricaoCategoria = descricaoCategoria;
 	}
+
 
 
 
