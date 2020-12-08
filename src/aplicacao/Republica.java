@@ -66,21 +66,28 @@ public class Republica {
 								
 								int ultimoObjeto = p.size()-1;
 								
-								if ((nomePessoa == null || nomePessoa.isEmpty()) || (emailPessoa == null || emailPessoa.isEmpty())|| (rendimentoPessoa == null ||
+								if ((nomePessoa == null || nomePessoa.isEmpty()) || (emailPessoa == null || emailPessoa.isEmpty()) || (rendimentoPessoa == null ||
 								rendimentoPessoa.isEmpty())) {
 									p.remove(ultimoObjeto);
-									throw new DadosPessoaisIncompletosException("Alguns dados no foram inseridos.");
-								}else if(Integer.parseInt(rendimentoPessoa) < 0) {
+									throw new DadosPessoaisIncompletosException("Alguns dados não foram inseridos.");
+								}else if(Double.parseDouble(rendimentoPessoa) < 0) {
 									p.remove(ultimoObjeto);
-									throw new RendimentoInvalidoException("No  possvel inserir valores negativos.");
+									throw new RendimentoInvalidoException("Não é possível inserir valores negativos.");
+								}else if(!rendimentoPessoa.matches("^(\\d+(\\.\\d{0,2})?|\\.?\\d{1,2})$")){
+									p.remove(ultimoObjeto);
+									throw new NumberFormatException("Não é possível inserir caracteres especiais ou letras.");
 								}else {
 									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-									JOptionPane.showMessageDialog(null, "Nmero de cadastros efetuados: " +p.size());
+									JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
 									cadastroUm = true;
 								}
 		
 							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
-								String msg = e.getMessage() + " Exceo capturada!";
+								String msg = e.getMessage() + " Exceção capturada!";
+								JOptionPane.showMessageDialog(null, msg);
+								e.printStackTrace();
+							}catch(NumberFormatException e) {
+								String msg = e.getMessage() + " Exceção capturada!";
 								JOptionPane.showMessageDialog(null, msg);
 								e.printStackTrace();
 							}
