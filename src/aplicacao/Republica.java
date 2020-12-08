@@ -11,10 +11,12 @@ import java.util.List;
 import entidades.Despesas;
 import entidades.Pessoa;
 import entidades.Categoria;
-import restricoes.DadosPessoaisIncompletosException;
 import entidades.Subcategoria;
+import restricoes.DadosPessoaisIncompletosException;
 import restricoes.RendimentoInvalidoException;
-
+import restricoes.DespesaInvalidaException;
+import restricoes.CategoriaInvalidaException;
+import restricoes.ValorDespesaInvalidaException;
 
 // Main
 
@@ -119,6 +121,28 @@ public class Republica {
 						if(sub == JOptionPane.YES_OPTION) {
 							descricaoSubcategoria = JOptionPane.showInputDialog("Digite o nome da subcategoria relacionada a despesa.");
 							list.get(ultimaDespesa).categoria.cadastrarSubcategoria(descricaoSubcategoria);
+						}
+						try {
+							
+							if ((descricaoDespesa == null || descricaoDespesa.isEmpty()) || (valor == null ||valor.isEmpty())) {
+								list.remove(ultimaDespesa);
+								throw new DespesaInvalidaException("Alguns dados nao foram inseridos na despesa.");
+							}else if(Integer.parseInt(valor) < 0) {
+								list.remove(ultimaDespesa);
+								throw new ValorDespesaInvalidaException("No  possvel inserir valores negativos.");
+							}else if ( (descricaoCategoria == null || descricaoCategoria.isEmpty()) ) {
+								list.remove(ultimaDespesa);
+								throw new CategoriaInvalidaException("Nome da categoria nao inserido");
+							}else {
+								JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+								JOptionPane.showMessageDialog(null, "Nmero de cadastros efetuados: " +list.size());
+							}
+							
+	
+						} catch( ValorDespesaInvalidaException | DespesaInvalidaException | CategoriaInvalidaException e) {
+							String msg = e.getMessage() + " Exceo capturada!";
+							JOptionPane.showMessageDialog(null, msg);
+							e.printStackTrace();
 						}
 					}
 				break;
