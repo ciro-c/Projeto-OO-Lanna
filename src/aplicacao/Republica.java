@@ -33,8 +33,8 @@ public class Republica {
 		
 		do {
 		
-			JOptionPane.showMessageDialog(null, "----------DIVISO DAS DESPESAS DE UMA REPBLICA----------\n\nOl, o que pretende fazer?\n"
-			+ "1) Cadastrar pessoa...\n2) Cadastrar despesa...\n3) Cadastrar categoria...\n4) Sair do programa...");
+			JOptionPane.showMessageDialog(null, "----------DIVISO DAS DESPESAS DE UMA REPBLICA----------\n\nOlá, o que pretende fazer?\n"
+			+ "1) Cadastrar pessoa.\n2) Cadastrar despesa.\n3) Despesas cadastradas.\n4) Pessoas cadastradas. \n5) Sair do Programa");
 			String respostaOpcao = JOptionPane.showInputDialog("Digite o nº da opção desejada");
 			int rO = Integer.parseInt(respostaOpcao);
 			i = rO ;
@@ -111,6 +111,7 @@ public class Republica {
 						
 						list.add(new Despesas(descricaoDespesa,val));
 						
+						
 						int ultimaDespesa = list.size()-1;
 						
 						list.get(ultimaDespesa).cadastrarCategoria(descricaoCategoria);
@@ -123,15 +124,35 @@ public class Republica {
 				break;
 				// Cadastrar categoria
 				case 3:
-					JOptionPane.showMessageDialog(null, "Opo 3");
+					JOptionPane.showMessageDialog(null, "Quantidade de despesas cadastradas:" + list.size());
+					String desp = JOptionPane.showInputDialog("Digite a despesa que deseja procurar: "); 
+					
+					
+					/*Object[] itens = {};
+					for(int n=0; i<list.size(); i++) {
+						itens.add();
+					} 
+					
+					Object selectedValue = JOptionPane.showInputDialog(null, "Escolha um item", "Opçao", JOptionPane.INFORMATION_MESSAGE, null,
+					itens, itens [0]); //}*/
+
+					
 				break;
 				// Sair do programa
 				case 4:
+					JOptionPane.showMessageDialog(null, "Quantidade de despesas cadastradas:" + p.size());
+				break;
+				
+				case 5:
 					JOptionPane.showMessageDialog(null, "Encerrando o programa...");
 				break;
 			}
 		}while(i!=4);
 		
+		/*public static boolean hasDespesa(List<Despesas> list, String descricaoDespesa) {
+			Despesas empl = list.stream().filter(x -> x.getDescricaoDespesas() == descricaoDespesas).findFirst().orElse(null));
+			return empl != null;
+		}*/
 	}
 	
 }
