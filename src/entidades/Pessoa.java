@@ -13,7 +13,6 @@ public class Pessoa {
 	private String rendimentos;
 	
 	public Pessoa(String nome, String email, String rendimentos) {
-		super();
 		this.nome = nome;
 		this.email = email;
 		this.rendimentos = rendimentos;

@@ -84,6 +84,7 @@ public class Republica {
 									JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
 									cadastroUm = true;
 								}
+
 		
 							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
 								String msg = e.getMessage() + " Exceção capturada!";
