@@ -60,8 +60,8 @@ public class Republica {
 		do {
 		
 			JOptionPane.showMessageDialog(null, "----------DIVISO DAS DESPESAS DE UMA REPBLICA----------\n\nOlá, o que pretende fazer?\n"
-			+ "1) Cadastrar pessoa.\n2) Cadastrar despesa.\n3) Despesas cadastradas.\n4) Pessoas cadastradas. \n5) Gerar relatorio\n6) Sair do Programa");
-			String respostaOpcao = JOptionPane.showInputDialog("Digite o nº da opção desejada");
+			+ "1) Cadastrar pessoa.\n2) Cadastrar despesa.\n3) Despesas cadastradas.\n4) Pessoas cadastradas. \n5) Gerar relatorio\n6) Sair do Programa","Menu", JOptionPane.INFORMATION_MESSAGE);
+			String respostaOpcao = JOptionPane.showInputDialog(null,"Digite o nº da opção desejada","Menu", JOptionPane.INFORMATION_MESSAGE);
 			int rO = Integer.parseInt(respostaOpcao);
 			i = rO ;
 			
@@ -79,10 +79,9 @@ public class Republica {
 						do {
 							
 							JOptionPane.showMessageDialog(null, "CADASTRAR PESSOA");
-							JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
-							String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
-							String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
-							String rendimentoPessoa = trocaVirgula(JOptionPane.showInputDialog("Rendimento da pessoa: ")); 
+							String nomePessoa = JOptionPane.showInputDialog(null,"Nome completo da pessoa: ","Cadastrar pessoa", JOptionPane.INFORMATION_MESSAGE);
+							String emailPessoa = JOptionPane.showInputDialog(null,"Email completo da pessoa: ","Cadastrar pessoa", JOptionPane.INFORMATION_MESSAGE);
+							String rendimentoPessoa = trocaVirgula(JOptionPane.showInputDialog(null,"Rendimento da pessoa: ","Cadastrar pessoa", JOptionPane.INFORMATION_MESSAGE)); 
 								
 							try {
 																
@@ -104,26 +103,25 @@ public class Republica {
 								
 								}else {
 									p.add(new Pessoa(nomePessoa, emailPessoa, rendimentoPessoa));
-									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-									JOptionPane.showMessageDialog(null, "Número de cadastros efetuados: " +p.size());
+									JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
 									cadastroUm = true;
 								}
 
 		
 							}catch(DadosPessoaisIncompletosException | RendimentoInvalidoException e) {
 								String msg = e.getMessage() + " Exceção capturada!";
-								JOptionPane.showMessageDialog(null, msg);
+								JOptionPane.showMessageDialog(null, msg,"ERROR", JOptionPane.INFORMATION_MESSAGE);
 								e.printStackTrace();
 							}catch(NumberFormatException e) {
 								String msg = e.getMessage() + " Exceção capturada!";
-								JOptionPane.showMessageDialog(null, msg);
+								JOptionPane.showMessageDialog(null, msg,"ERROR", JOptionPane.INFORMATION_MESSAGE);
 								e.printStackTrace();
 							}
 						
 						}while(cadastroUm == false);
 						
-						String opcaoNova = JOptionPane.showInputDialog("Deseja cadastrar outra pessoa ou retornar ao menu "
-						+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...");
+						String opcaoNova = JOptionPane.showInputDialog(null,"Deseja cadastrar outra pessoa ou retornar ao menu "
+						+ "principal?\n\n1) Cadadastrar outra pessoa...\n2) Retornar ao menu principal...","Cadastrar de novo?", JOptionPane.INFORMATION_MESSAGE);
 						int oN = Integer.parseInt(opcaoNova);
 						j = oN;
 					
@@ -134,21 +132,21 @@ public class Republica {
 	
 				case 2:
 					String descricaoSubcategoria = "";
-					String registro = JOptionPane.showInputDialog("Digite a quantidade de despesas existentes: "); 
+					String registro = JOptionPane.showInputDialog(null,"Digite a quantidade de despesas existentes: ","Cadastrar despesas", JOptionPane.INFORMATION_MESSAGE); 
 					int k = Integer.parseInt(registro);
 
 					
 					for(int m=0; m<k; m++) {
 						
-						JOptionPane.showMessageDialog(null, "Despesa #" + (m+1) + ": ");
-						String descricaoDespesa = JOptionPane.showInputDialog("Nome da despesa: Ex.(CAESB, CEB, Net..)");
-						String descricaoCategoria = JOptionPane.showInputDialog("Digite o nome da categoria. Ex.(Água, Luz, Telefonia e comunicações..)");
-						String valor = trocaVirgula(JOptionPane.showInputDialog("Digite o valor da despesa: ")); 
+						JOptionPane.showMessageDialog(null, "Despesa #" + (m+1) + ": ","Cadastrar Despesa", JOptionPane.INFORMATION_MESSAGE);
+						String descricaoDespesa = JOptionPane.showInputDialog(null,"Nome da despesa: Ex.(CAESB, CEB, Net..)","Cadastrar Despesa", JOptionPane.INFORMATION_MESSAGE);
+						String descricaoCategoria = JOptionPane.showInputDialog(null,"Digite o nome da categoria. Ex.(Água, Luz, Telefonia e comunicações..)","Nome categoria", JOptionPane.INFORMATION_MESSAGE);
+						String valor = trocaVirgula(JOptionPane.showInputDialog(null,"Digite o valor da despesa: ","Valor despesa", JOptionPane.INFORMATION_MESSAGE)); 
 						double val = Double.parseDouble(valor);
 						int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?", "Continua", JOptionPane.YES_NO_OPTION);
 											
 						if(sub == JOptionPane.YES_OPTION) {
-							descricaoSubcategoria = JOptionPane.showInputDialog("Digite o nome da subcategoria relacionada a despesa.");
+							descricaoSubcategoria = JOptionPane.showInputDialog(null,"Digite o nome da subcategoria relacionada a despesa.","Subcategoria", JOptionPane.INFORMATION_MESSAGE);
 						}
 						try {
 							
@@ -165,19 +163,16 @@ public class Republica {
 								throw new CategoriaInvalidaException("Nome da categoria nao inserido");
 							
 							}else {
-								JOptionPane.showMessageDialog(null, "Ate aqui foi");
 								list.add(new Despesas(descricaoDespesa,val));
-								JOptionPane.showMessageDialog(null, "Foi 2");
 								int ultimaDespesa = list.size()-1;
 								list.get(ultimaDespesa).cadastrarCategoria(descricaoCategoria);
 								list.get(ultimaDespesa).categoria.cadastrarSubcategoria(descricaoSubcategoria);
-								JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
-								JOptionPane.showMessageDialog(null, "Nmero de cadastros efetuados: " +list.size());
+								JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!","Sucesso", JOptionPane.INFORMATION_MESSAGE);
 							}
 							
 						} catch( ValorDespesaInvalidaException | DespesaInvalidaException | CategoriaInvalidaException e) {
 							String msg = e.getMessage() + " Exceo capturada!";
-							JOptionPane.showMessageDialog(null, msg);
+							JOptionPane.showMessageDialog(null, msg,"ERROR", JOptionPane.INFORMATION_MESSAGE);
 							e.printStackTrace();
 						}
 					}
@@ -189,7 +184,7 @@ public class Republica {
 						File arquivoDespesas = new File(nomeDespesas);
 					
 						if(!arquivoDespesas.exists()) {
-							JOptionPane.showMessageDialog(null, "Nenhuma despesa cadastrada, por favor cadestre uma" );
+							JOptionPane.showMessageDialog(null, "Nenhuma despesa cadastrada, por favor cadestre uma","ERROR", JOptionPane.INFORMATION_MESSAGE);
 
 						}else{
 							tudo = "";
@@ -203,7 +198,7 @@ public class Republica {
 						      }
 						      leitorDespesas.close();
 							
-							JOptionPane.showMessageDialog(null, "Despesas cadastradas:\n"+ tudo );
+							JOptionPane.showMessageDialog(null, "Despesas cadastradas:\n"+ tudo ,"Despesas cadastradas", JOptionPane.INFORMATION_MESSAGE);
 					
 						
 						}
@@ -220,7 +215,7 @@ public class Republica {
 						File arquivoAlunos = new File("alunos.txt");
 						
 						if(!arquivoAlunos.exists()) {
-							JOptionPane.showMessageDialog(null, "Nenhuma pessoa cadastrada, por favor cadestre uma" );
+							JOptionPane.showMessageDialog(null, "Nenhuma pessoa cadastrada, por favor cadestre uma","ERROR", JOptionPane.INFORMATION_MESSAGE );
 						}else{
 							tudo = "";
 							Scanner leitorAlunos = new Scanner(arquivoAlunos);
@@ -233,7 +228,7 @@ public class Republica {
 							}
 							leitorAlunos.close();
 							
-							JOptionPane.showMessageDialog(null, "Pessoas cadastradas:\n"+ tudo );
+							JOptionPane.showMessageDialog(null, "Pessoas cadastradas:\n"+ tudo,"Pessoas Cadastradas", JOptionPane.INFORMATION_MESSAGE );
 					
 						}
 					}catch( IOException e) {
@@ -246,7 +241,6 @@ public class Republica {
 				case 5:
 					ArrayList<String> nomePessoa = new ArrayList<String>();
 					ArrayList<Double> rendaPessoa = new ArrayList<Double>();
-					JOptionPane.showMessageDialog(null, "Gerar relatorio");
 										
 					double somaDespesas = 0.0;
 					double somaRenda = 0.0;
@@ -260,10 +254,10 @@ public class Republica {
 						File arquivoAlunos = new File("alunos.txt");
 						
 						if (!arquivoAlunos.exists()) {
-							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma pessoa antes.");
+							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma pessoa antes.","ERROR", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						}else if(!arquivoDespesas.exists()) {
-							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma despesa antes.");
+							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma despesa antes.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						}else {
 		
@@ -295,14 +289,14 @@ public class Republica {
 						e.printStackTrace();
 					}
 					
-					String tipoRelatorio = JOptionPane.showInputDialog("Quer gerar um relatorio com regra:\n 1)Igualitaria\n 2)Proporcional ");
+					String tipoRelatorio = JOptionPane.showInputDialog(null,"Quer gerar um relatorio com regra:\n 1)Igualitaria\n 2)Proporcional ", "Gerar relatorio", JOptionPane.INFORMATION_MESSAGE);
 					double resultado;
 					int controle = 0;
 					DecimalFormat decimal = new DecimalFormat("#.##");
 					decimal.setRoundingMode(RoundingMode.UP);
 					if(Integer.parseInt(tipoRelatorio) == 1) {
 					resultado = (double)	somaDespesas/nomePessoa.size();
-					JOptionPane.showMessageDialog(null, "Cada pessoa tem que pagar R$ "+ decimal.format(resultado));
+					JOptionPane.showMessageDialog(null, "Cada pessoa tem que pagar R$ "+ decimal.format(resultado),"Resultado da divisao igualitaria", JOptionPane.INFORMATION_MESSAGE);
 						
 					}else if(Integer.parseInt(tipoRelatorio) == 2) {
 						tudo ="";
@@ -311,15 +305,15 @@ public class Republica {
 						tudo += nomePessoa.get(controle) +" vai pagar R$ "+decimal.format(resultado)+"\n";
 						controle++;
 					}	
-					JOptionPane.showMessageDialog(null, tudo );
+					JOptionPane.showMessageDialog(null, tudo,"Resultado da divisao proporcional", JOptionPane.INFORMATION_MESSAGE );
 					}else {
-						JOptionPane.showMessageDialog(null, "Voltando ao menu");
+						JOptionPane.showMessageDialog(null, "Voltando ao menu","Voltando", JOptionPane.INFORMATION_MESSAGE);
 					}
 					
 				break;
 				
 				case 6:
-					JOptionPane.showMessageDialog(null, "Encerrando o programa...");
+					JOptionPane.showMessageDialog(null, "Encerrando o programa...","Encerrando", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			}
 		}while(i!=6);
