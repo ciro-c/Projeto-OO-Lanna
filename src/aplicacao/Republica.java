@@ -4,14 +4,17 @@ package aplicacao;
 
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 // Imports das classes do projeto
 
 import entidades.Despesas;
 import entidades.Pessoa;
-import entidades.Categoria;
-import entidades.Subcategoria;
 import restricoes.DadosPessoaisIncompletosException;
 import restricoes.RendimentoInvalidoException;
 import restricoes.DespesaInvalidaException;
@@ -22,6 +25,17 @@ import restricoes.ValorDespesaInvalidaException;
 
 public class Republica {
 	
+	public static String trocaVirgula(String frase) {
+		StringBuilder stringBuilder = new StringBuilder(frase);
+		if(frase.lastIndexOf(",")!=-1) {
+        stringBuilder.insert(frase.lastIndexOf(",")+1, ".");
+        stringBuilder.deleteCharAt(frase.lastIndexOf(","));
+        return stringBuilder.toString();
+        }else {
+        	return frase;
+        }
+	}
+		
 	public static void main(String[] args) {
 		
 		// Variveis e Arraylists
@@ -30,7 +44,7 @@ public class Republica {
 		int j = 0; // Varavel de condio das opes
 		
 		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); // Coleo de objetos da classe Pessoa
-		List<Despesas> list = new ArrayList<>();
+		ArrayList<Despesas> list = new ArrayList<>();
 		// Menu principal
 		
 		do {
@@ -178,7 +192,84 @@ public class Republica {
 				break;
 				
 				case 5:
+					ArrayList<String> nomePessoa = new ArrayList<String>();
+					ArrayList<Double> rendaPessoa = new ArrayList<Double>();
+					Calendar calendario =  Calendar.getInstance();
 					JOptionPane.showMessageDialog(null, "Gerar relatorio");
+										
+					int mesRelatorio = calendario.get(Calendar.MONTH);
+					int anoRelatorio = calendario.get(Calendar.YEAR);
+					String nomeDespesas = "despesas";
+					double somaDespesas = 0.0;
+					double somaRenda = 0.0;
+					
+					nomeDespesas = nomeDespesas +"_"+ mesRelatorio +"_"+ anoRelatorio +".txt";
+					
+					
+					try {
+						
+					      
+						File arquivoDespesas = new File(nomeDespesas);
+						File arquivoAlunos = new File("alunos.txt");
+						
+						if (!arquivoAlunos.exists()) {
+							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma pessoa antes.");
+							break;
+						}else if(!arquivoDespesas.exists()) {
+							JOptionPane.showMessageDialog(null, "Por Favor cadastre uma despesa antes.");
+							break;
+						}else {
+		
+							Scanner leitorAlunos = new Scanner(arquivoAlunos);
+						      while (leitorAlunos.hasNextLine()) {
+						    	
+						        String infoAlunos = leitorAlunos.nextLine();
+						        System.out.println(infoAlunos);
+						        nomePessoa.add(infoAlunos.substring(0,infoAlunos.indexOf(";")));
+						        String temp = infoAlunos.substring(infoAlunos.lastIndexOf(";")+1);
+						        temp = trocaVirgula(temp);
+						        rendaPessoa.add(Double.parseDouble(temp));
+						        somaRenda = somaRenda + Double.parseDouble(temp);
+						      }
+						      leitorAlunos.close();
+
+						      Scanner leitorDespesas = new Scanner(arquivoDespesas);
+						      while (leitorDespesas.hasNextLine()) {
+						        String infoDespesas = leitorDespesas.nextLine();
+						        String temp = infoDespesas.substring(infoDespesas.lastIndexOf(";")+1);
+						        somaDespesas = somaDespesas + Double.parseDouble(trocaVirgula(temp));
+						      }
+						      leitorDespesas.close();
+						      
+						}
+					    
+					    
+					}catch( IOException e) {
+						System.out.println("An error occurred.");	
+						e.printStackTrace();
+					}
+					
+					String tipoRelatorio = JOptionPane.showInputDialog("Quer gerar um relatorio com regra:\n 1)Igualitaria\n 2)Proporcional ");
+					double resultado;
+					int controle = 0;
+					DecimalFormat decimal = new DecimalFormat("#.##");
+					decimal.setRoundingMode(RoundingMode.UP);
+					if(Integer.parseInt(tipoRelatorio) == 1) {
+						System.out.println(nomePessoa.size());
+					resultado = (double)	somaDespesas/nomePessoa.size();
+					JOptionPane.showMessageDialog(null, "Cada pessoa tem que pagar R$ "+ decimal.format(resultado));
+						
+					}else if(Integer.parseInt(tipoRelatorio) == 2) {
+					while(controle < nomePessoa.size()) {
+						resultado = somaDespesas*rendaPessoa.get(controle)/somaRenda;
+						JOptionPane.showMessageDialog(null,nomePessoa.get(controle) +" vai pagar R$ "+decimal.format(resultado)+"\n Pagina "+(controle+1)+ "/"+nomePessoa.size() );
+						controle++;
+					}	
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "Voltando ao menu");
+					}
+					
 				break;
 				
 				case 6:

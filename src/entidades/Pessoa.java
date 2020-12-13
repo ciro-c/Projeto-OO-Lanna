@@ -22,12 +22,12 @@ public class Pessoa {
 		BufferedWriter bw; 
 		
 		try {
-			File myFile = new File("alunos.txt");
+			File meuArquivo = new File("alunos.txt");
 			
-			if (!myFile.exists()) {
-				arq = new FileWriter(myFile);
+			if (!meuArquivo.exists()) {
+				arq = new FileWriter(meuArquivo);
 			} else {
-				arq = new FileWriter(myFile,true);
+				arq = new FileWriter(meuArquivo,true);
 			}
 			
 			bw = new BufferedWriter(arq);
