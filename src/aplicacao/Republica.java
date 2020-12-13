@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 // Imports das classes do projeto
 
@@ -37,16 +38,25 @@ public class Republica {
 	}
 		
 	public static void main(String[] args) {
+		Calendar calendario =  Calendar.getInstance();
+		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); 
+		ArrayList<Despesas> list = new ArrayList<>();
 		
 		// Variveis e Arraylists
 		
+		
+		int mesRelatorio = calendario.get(Calendar.MONTH);
+		int anoRelatorio = calendario.get(Calendar.YEAR);
 		int i = 0; // Varavel de condio do menu principal
 		int j = 0; // Varavel de condio das opes
+		String nomeDespesas = "despesas";
+		String tudo = "";
 		
-		ArrayList<Pessoa> p = new ArrayList<Pessoa>(); // Coleo de objetos da classe Pessoa
-		ArrayList<Despesas> list = new ArrayList<>();
+		nomeDespesas = nomeDespesas +"_"+ mesRelatorio +"_"+ anoRelatorio +".txt";
+		
+		
+		
 		// Menu principal
-		
 		do {
 		
 			JOptionPane.showMessageDialog(null, "----------DIVISO DAS DESPESAS DE UMA REPBLICA----------\n\nOlá, o que pretende fazer?\n"
@@ -72,7 +82,7 @@ public class Republica {
 							JOptionPane.showMessageDialog(null, "Por favor, informe os dados a seguir...");
 							String nomePessoa = JOptionPane.showInputDialog("Nome completo da pessoa: ");
 							String emailPessoa = JOptionPane.showInputDialog("Email completo da pessoa: ");
-							String rendimentoPessoa = JOptionPane.showInputDialog("Rendimento da pessoa: "); 
+							String rendimentoPessoa = trocaVirgula(JOptionPane.showInputDialog("Rendimento da pessoa: ")); 
 								
 							try {
 																
@@ -133,7 +143,7 @@ public class Republica {
 						JOptionPane.showMessageDialog(null, "Despesa #" + (m+1) + ": ");
 						String descricaoDespesa = JOptionPane.showInputDialog("Nome da despesa: Ex.(CAESB, CEB, Net..)");
 						String descricaoCategoria = JOptionPane.showInputDialog("Digite o nome da categoria. Ex.(Água, Luz, Telefonia e comunicações..)");
-						String valor = JOptionPane.showInputDialog("Digite o valor da despesa: "); 
+						String valor = trocaVirgula(JOptionPane.showInputDialog("Digite o valor da despesa: ")); 
 						double val = Double.parseDouble(valor);
 						int sub = JOptionPane.showConfirmDialog(null, "Deseja cadastrar uma subcategoria?", "Continua", JOptionPane.YES_NO_OPTION);
 											
@@ -146,7 +156,7 @@ public class Republica {
 								
 								throw new DespesaInvalidaException("Alguns dados nao foram inseridos na despesa.");
 							
-							}else if(Integer.parseInt(valor) < 0) {
+							}else if(Double.parseDouble(valor) < 0) {
 							
 								throw new ValorDespesaInvalidaException("No  possvel inserir valores negativos.");
 							
@@ -155,8 +165,9 @@ public class Republica {
 								throw new CategoriaInvalidaException("Nome da categoria nao inserido");
 							
 							}else {
-							
+								JOptionPane.showMessageDialog(null, "Ate aqui foi");
 								list.add(new Despesas(descricaoDespesa,val));
+								JOptionPane.showMessageDialog(null, "Foi 2");
 								int ultimaDespesa = list.size()-1;
 								list.get(ultimaDespesa).cadastrarCategoria(descricaoCategoria);
 								list.get(ultimaDespesa).categoria.cadastrarSubcategoria(descricaoSubcategoria);
@@ -173,37 +184,73 @@ public class Republica {
 				break;
 
 				case 3:
-					JOptionPane.showMessageDialog(null, "Quantidade de despesas cadastradas:" + list.size());
-					String desp = JOptionPane.showInputDialog("Digite a despesa que deseja procurar: "); 
+					try {
+						
+						File arquivoDespesas = new File(nomeDespesas);
 					
-					
-					/*Object[] itens = {};
-					for(int n=0; i<list.size(); i++) {
-						itens.add();
-					} 
-					
-					Object selectedValue = JOptionPane.showInputDialog(null, "Escolha um item", "Opçao", JOptionPane.INFORMATION_MESSAGE, null,
-					itens, itens [0]); //}*/
+						if(!arquivoDespesas.exists()) {
+							JOptionPane.showMessageDialog(null, "Nenhuma despesa cadastrada, por favor cadestre uma" );
 
+						}else{
+							tudo = "";
+							Scanner leitorDespesas = new Scanner(arquivoDespesas);
+						      while (leitorDespesas.hasNextLine()) {
+						        String infoDespesas = leitorDespesas.nextLine();
+						        String temp = infoDespesas.substring(infoDespesas.lastIndexOf(";")+1);
+						        String tempNome = infoDespesas.substring(0, infoDespesas.indexOf(";"));
+						        String tempCategoria = infoDespesas.substring(infoDespesas.indexOf(";")+1,infoDespesas.lastIndexOf(";"));
+						        tudo += "\nDespesa: "+ tempNome+"\nCategoria: "+ tempCategoria +"\nGasto de R$"+ Double.parseDouble(trocaVirgula(temp));
+						      }
+						      leitorDespesas.close();
+							
+							JOptionPane.showMessageDialog(null, "Despesas cadastradas:\n"+ tudo );
+					
+						
+						}
+					}catch( IOException e) {
+						System.out.println("An error occurred.");	
+						e.printStackTrace();
+					}
 					
 				break;
 				case 4:
-					JOptionPane.showMessageDialog(null, "Quantidade de despesas cadastradas:" + p.size());
+					
+					try {
+						
+						File arquivoAlunos = new File("alunos.txt");
+						
+						if(!arquivoAlunos.exists()) {
+							JOptionPane.showMessageDialog(null, "Nenhuma pessoa cadastrada, por favor cadestre uma" );
+						}else{
+							tudo = "";
+							Scanner leitorAlunos = new Scanner(arquivoAlunos);
+							while (leitorAlunos.hasNextLine()) {
+								String infoAlunos = leitorAlunos.nextLine();
+						        String temp = infoAlunos.substring(infoAlunos.lastIndexOf(";")+1);
+						        String tempNome = infoAlunos.substring(0, infoAlunos.indexOf(";"));
+						        String tempEmail = infoAlunos.substring(infoAlunos.indexOf(";")+1,infoAlunos.lastIndexOf(";"));
+						        tudo += "\nNome: "+ tempNome+"\nEmail: "+ tempEmail +"\nRendimento R$"+ Double.parseDouble(trocaVirgula(temp));
+							}
+							leitorAlunos.close();
+							
+							JOptionPane.showMessageDialog(null, "Pessoas cadastradas:\n"+ tudo );
+					
+						}
+					}catch( IOException e) {
+						System.out.println("An error occurred.");	
+						e.printStackTrace();
+					}
+					
 				break;
 				
 				case 5:
 					ArrayList<String> nomePessoa = new ArrayList<String>();
 					ArrayList<Double> rendaPessoa = new ArrayList<Double>();
-					Calendar calendario =  Calendar.getInstance();
 					JOptionPane.showMessageDialog(null, "Gerar relatorio");
 										
-					int mesRelatorio = calendario.get(Calendar.MONTH);
-					int anoRelatorio = calendario.get(Calendar.YEAR);
-					String nomeDespesas = "despesas";
 					double somaDespesas = 0.0;
 					double somaRenda = 0.0;
 					
-					nomeDespesas = nomeDespesas +"_"+ mesRelatorio +"_"+ anoRelatorio +".txt";
 					
 					
 					try {
@@ -224,7 +271,6 @@ public class Republica {
 						      while (leitorAlunos.hasNextLine()) {
 						    	
 						        String infoAlunos = leitorAlunos.nextLine();
-						        System.out.println(infoAlunos);
 						        nomePessoa.add(infoAlunos.substring(0,infoAlunos.indexOf(";")));
 						        String temp = infoAlunos.substring(infoAlunos.lastIndexOf(";")+1);
 						        temp = trocaVirgula(temp);
@@ -255,17 +301,17 @@ public class Republica {
 					DecimalFormat decimal = new DecimalFormat("#.##");
 					decimal.setRoundingMode(RoundingMode.UP);
 					if(Integer.parseInt(tipoRelatorio) == 1) {
-						System.out.println(nomePessoa.size());
 					resultado = (double)	somaDespesas/nomePessoa.size();
 					JOptionPane.showMessageDialog(null, "Cada pessoa tem que pagar R$ "+ decimal.format(resultado));
 						
 					}else if(Integer.parseInt(tipoRelatorio) == 2) {
+						tudo ="";
 					while(controle < nomePessoa.size()) {
 						resultado = somaDespesas*rendaPessoa.get(controle)/somaRenda;
-						JOptionPane.showMessageDialog(null,nomePessoa.get(controle) +" vai pagar R$ "+decimal.format(resultado)+"\n Pagina "+(controle+1)+ "/"+nomePessoa.size() );
+						tudo += nomePessoa.get(controle) +" vai pagar R$ "+decimal.format(resultado)+"\n";
 						controle++;
 					}	
-						
+					JOptionPane.showMessageDialog(null, tudo );
 					}else {
 						JOptionPane.showMessageDialog(null, "Voltando ao menu");
 					}
@@ -278,10 +324,6 @@ public class Republica {
 			}
 		}while(i!=6);
 		
-		/*public static boolean hasDespesa(List<Despesas> list, String descricaoDespesa) {
-			Despesas empl = list.stream().filter(x -> x.getDescricaoDespesas() == descricaoDespesas).findFirst().orElse(null));
-			return empl != null;
-		}*/
 	}
 	
 }
