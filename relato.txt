@@ -1,0 +1,54 @@
+		
+Projeto-OO-Lanna
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	O projeto do aplicativo de divisão das despesas de uma república está dividido em três pacotes, que contém as suas
+respectivas classes. Os conceitos de abstração para POO foram aplicados onde houve a necessidade. Segue abaixo a 
+relação de pacotes, classes e demais explicações:
+
+- aplicacao
+	- Republica (main)
+		No menu principal foi utilizada interface gráfica (JOptionPane). Typecasting foi utilizado para readequar os tipos de entrada do usuário 
+		para sua manipulação pelo programa. O método da divisão de despesas fez uso de informações dos arquivos gravados.
+- entidades
+	- Categoria
+		A classe Categoria contém os métodos padrão - get e set -, para colocar os dados informados pelo 
+		usuário no objeto e também retornar essas informações, além de outros dois métodos, um para criar a descrição 
+		da categoria informada (Categoria) e outro para o cadastro de um nova subcategoria (cadastrarSubcategoria). No 
+		método cadastrarSubcategoria foi instanciado o objeto da classe Subcategoria.
+	- Despesas
+		A classe Despesas contém os métodos padrão - get e set -, para colocar os dados informados pelo 
+		usuário no objeto e também retornar essas informações, além de dois outros métodos, um para criar a descrição 
+		da despesa informada (Despesa) e outro para o cadastro de categoria (cadastrarCategoria), inclusive sua persistência em arquivo (.txt). 
+		No método cadastrarCategoria foi instanciado o objeto da classe Categoria.
+	- Pessoa
+		A classe Pessoa contém os métodos padrão - get e set -, para colocar os dados informados pelo 
+		usuário no objeto e também retornar essas informações, além de outro método (Pessoa), para o cadastro de pessoa e
+		para a persitência de informações em arquivo de texto (.txt).
+	- Subcategoria
+		Nenhum outro método foi utilizado, além do padrão - get e set -, por se tratar de uma classe filha de 
+		Categoria. 
+- restricoes
+	
+		O pacote de restrições contém as classes das exceções exigidas, o nome é autoexplicativo. A classe está responsável pela criação das 
+		execeptions e a criação do lançamento das mensagens.
+		
+	- CategoriaInvalidaException
+		
+	- DadosPessoaisIncompletos
+		
+	- DespesaInvalidaException
+		
+	- RendimentoInvalidoException
+		
+	- ValorDespesaInvalidaException
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Integrantes:
+
+Ana Clara Cardoso Oliveira - 190010118
+Ciro Costa de Araújo - 190011611
+Wesley Santos - 1800292440
+		
