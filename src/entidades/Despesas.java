@@ -55,9 +55,6 @@ public class Despesas {
 		this.ano = ano;
 	}
 
-	public void imprimirRelatorioDespesas() {
-		
-	}
 	
 	public void cadastrarCategoria(String descricaoCategoria) {
 		FileWriter arq;
