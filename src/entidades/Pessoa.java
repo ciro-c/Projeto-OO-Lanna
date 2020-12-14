@@ -67,7 +67,4 @@ public class Pessoa {
 		this.rendimentos = rendimentos;
 	}
 
-	public void cadastrarPessoa() {
-		
-	}
 }
