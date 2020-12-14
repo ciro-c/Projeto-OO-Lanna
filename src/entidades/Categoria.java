@@ -7,9 +7,6 @@ public class Categoria {
 
 	public Subcategoria sub;
 	
-	public Categoria(){
-		
-	}	
   
 	public Categoria(String descricaoCategoria) {
 		super();
