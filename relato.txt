@@ -10,7 +10,7 @@ relação de pacotes, classes e demais explicações:
 - aplicacao
 	- Republica (main)
 		No menu principal foi utilizada interface gráfica (JOptionPane). Typecasting foi utilizado para readequar os tipos de entrada do usuário 
-		para sua manipulação pelo programa. O método da divisão de despesas fez uso de informações dos arquivos gravados.
+		para sua manipulação pelo programa. A divisão de despesas fez uso de informações dos arquivos gravados.
 - entidades
 	- Categoria
 		A classe Categoria contém os métodos padrão - get e set -, para colocar os dados informados pelo 
